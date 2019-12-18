@@ -8,7 +8,7 @@ public class DatabaseGUI extends GBFrame {
 
 	JButton addPerson = addButton("Add Person", 2,1,1,1);
 	JButton output = addButton("Output", 2,3,1,1);
-	JComboBox type = addComboBox(1,2,1,1);
+	
 	
 	public static void main(String[] args) {
 		JFrame frm = new DatabaseGUI();
@@ -16,13 +16,6 @@ public class DatabaseGUI extends GBFrame {
 		frm.setSize(350, 170);
 		frm.setVisible(true);
 		frm.getContentPane().setBackground(new Color(54, 134, 239));
-	}
-	
-	public DatabaseGUI() {
-		type.addItem("Person");
-		type.addItem("Student");
-		type.addItem("Undergraduate");
-		type.addItem("Graduate");
 	}
 	
 	public void buttonClicked(JButton button) {
