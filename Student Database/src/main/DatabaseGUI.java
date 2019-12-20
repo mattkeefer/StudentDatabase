@@ -13,14 +13,17 @@ public class DatabaseGUI extends GBFrame {
 	public static void main(String[] args) {
 		JFrame frm = new DatabaseGUI();
 		frm.setTitle("Student Database");
-		frm.setSize(350, 170);
+		frm.setSize(400, 300);
 		frm.setVisible(true);
 		frm.getContentPane().setBackground(new Color(54, 134, 239));
 	}
 	
 	public void buttonClicked(JButton button) {
-		if(button == addPerson) {
-			addDialog dlg = new addDialog(this);
+		try {
+			if(button == addPerson) {
+				addDialog dlg = new addDialog(this);
+			}
 		}
+		catch()
 	}
 }
