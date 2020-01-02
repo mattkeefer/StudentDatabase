@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import BreezySwing.*;
+import java.util.*;
 
 public class addDialog extends GBDialog {
 
@@ -15,17 +16,24 @@ public class addDialog extends GBDialog {
 	JLabel nameLbl = addLabel("<html><font color='white'>Name:</font></html>", 2,1,1,1);
 	JTextField name = addTextField("", 2,2,2,1);
 	JLabel idLbl = addLabel("<html><font color='white'>ID Number:</font></html>", 3,1,1,1);
-	JTextField id = addTextField("", 3,2,2,1);
+	IntegerField id = addIntegerField (0, 3,2,2,1);
 	JLabel majorLbl = addLabel("<html><font color='white'>Major:</font></html>", 4,1,1,1);
 	JTextField major = addTextField("", 4,2,2,1);
 	JLabel gradeLbl = addLabel("<html><font color='white'>Grade Level:</font></html>", 5,1,1,1);
 	JComboBox grade = addComboBox(5,2,2,1);
 	JButton add = addButton("Add", 6,1,2,1);
 	JButton close = addButton("Close", 6,3,2,1);
+	static int count = 0;
+	int cat = 0;
+	People p;
 	
-	public addDialog(JFrame frm) {
+	public addDialog(JFrame frm, People pl) throws FormatException {
 		super(frm);
 		getContentPane().setBackground(new Color(54, 134, 239).darker());
+		if(count>=10) {
+			throw new FormatException("There is a maximum of 10 people.");
+		}
+		p = pl;
 		type.addItem("Person");
 		type.addItem("Student");
 		type.addItem("Undergraduate");
@@ -39,15 +47,19 @@ public class addDialog extends GBDialog {
 			public void actionPerformed(ActionEvent e) {
 				if(type.getSelectedItem().equals("Person")) {
 					setSetters(0);
+					cat = 0;
 				}
 				else if(type.getSelectedItem().equals("Student")) {
 					setSetters(1);
+					cat = 1;
 				}
 				else if(type.getSelectedItem().equals("Undergraduate")) {
 					setSetters(2);
+					cat = 2;
 				}
 				else if(type.getSelectedItem().equals("Graduate")) {
 					setSetters(3);
+					cat = 3;
 				}
 			}
 		});
@@ -84,7 +96,18 @@ public class addDialog extends GBDialog {
 	
 	public void buttonClicked(JButton button) {
 		if(button==add) {
-			//add thingy thing
+			count++;
+			switch (cat) {
+			case 0:
+				p.add(name.getText());
+				break;
+			case 1:
+				p.add(name.getText(), id.getNumber());
+				break;
+			case 2:
+				p.add(name.getText(), id.getNumber(), grade.getSelectedIndex());
+				break;
+			}
 		}
 		dispose();
 	}

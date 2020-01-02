@@ -8,7 +8,7 @@ public class DatabaseGUI extends GBFrame {
 
 	JButton addPerson = addButton("Add Person", 2,1,1,1);
 	JButton output = addButton("Output", 2,3,1,1);
-	
+	People pl = new People();
 	
 	public static void main(String[] args) {
 		JFrame frm = new DatabaseGUI();
@@ -21,9 +21,14 @@ public class DatabaseGUI extends GBFrame {
 	public void buttonClicked(JButton button) {
 		try {
 			if(button == addPerson) {
-				addDialog dlg = new addDialog(this);
+				addDialog dlg = new addDialog(this, pl);
 			}
 		}
-		catch()
+		catch(FormatException e) {
+			messageBox(e.getMessage());
+		}
+		if(button == output) {
+			System.out.println(pl.toString());
+		}
 	}
 }
