@@ -27,8 +27,13 @@ public class DatabaseGUI extends GBFrame {
 		catch(FormatException e) {
 			messageBox(e.getMessage());
 		}
-		if(button == output) {
-			System.out.println(pl.toString());
+		try {
+			if(button == output) {
+				outputDialog outdlg = new outputDialog(this, pl);
+			}
+		}
+		catch(FormatException e) {
+			messageBox(e.getMessage());
 		}
 	}
 }

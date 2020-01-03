@@ -21,4 +21,16 @@ public class People {
 	public void add(String nm, int i, int g) {
 		people.add(new Undergrad(nm, i, g));
 	}
+	
+	public void add(String nm, int i, String m) {
+		people.add(new Grad(nm, i, m));
+	}
+	
+	public int getSize() {
+		return people.size();
+	}
+	
+	public ArrayList<Person> getPeople() {
+		return people;
+	}
 }

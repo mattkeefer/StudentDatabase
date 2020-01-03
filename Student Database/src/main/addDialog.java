@@ -83,32 +83,49 @@ public class addDialog extends GBDialog {
 		if(i>0) {
 			idLbl.setVisible(true);
 			id.setVisible(true);
-			if(i>1) {
+			if(i==3) {
 				majorLbl.setVisible(true);
 				major.setVisible(true);
-				if(i==2) {
-					gradeLbl.setVisible(true);
-					grade.setVisible(true);
-				}
+			}
+			if(i==2) {
+				gradeLbl.setVisible(true);
+				grade.setVisible(true);
 			}
 		}
 	}
 	
 	public void buttonClicked(JButton button) {
-		if(button==add) {
-			count++;
-			switch (cat) {
-			case 0:
-				p.add(name.getText());
-				break;
-			case 1:
-				p.add(name.getText(), id.getNumber());
-				break;
-			case 2:
-				p.add(name.getText(), id.getNumber(), grade.getSelectedIndex());
-				break;
+		try {
+			if(button==add) {
+				count++;
+				if(name.getText().trim().equals("")) {
+					throw new FormatException("Please enter a name.");
+				}
+				switch (cat) {
+				case 0:
+					p.add(name.getText());
+					break;
+				case 1:
+					System.out.print(id.getNumber()); //FIX THIS --> ID FIELD NOT DISPLAYING
+					p.add(name.getText(), id.getNumber());
+					break;
+				case 2:
+					p.add(name.getText(), id.getNumber(), grade.getSelectedIndex());
+					break;
+				case 3:
+					if(major.getText().trim().equals("")) {
+						throw new FormatException("Please enter a major.");
+					}
+					p.add(name.getText(), id.getNumber(), major.getText());
+				}
 			}
+			dispose();
 		}
-		dispose();
+		catch(FormatException e) {
+			messageBox(e.getMessage());
+		}
+		catch(NumberFormatException e) {
+			messageBox("Please use integer values only");
+		}
 	}
 }
