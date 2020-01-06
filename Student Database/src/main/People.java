@@ -33,4 +33,45 @@ public class People {
 	public ArrayList<Person> getPeople() {
 		return people;
 	}
+	
+	public ArrayList<Person> getStudents() {
+		ArrayList<Person> students = new ArrayList<Person>();
+		for(Person p : people) {
+			if(p instanceof Student) {
+				students.add(p);
+			}
+		}
+		return students;
+	}
+	
+	public ArrayList<Person> getUndergrads() {
+		ArrayList<Person> undergrads = new ArrayList<Person>();
+		for(Person p : people) {
+			if(p instanceof Undergrad) {
+				undergrads.add(p);
+			}
+		}
+		return undergrads;
+	}
+	
+	public ArrayList<Person> getGrads() {
+		ArrayList<Person> grads = new ArrayList<Person>();
+		for(Person p : people) {
+			if(p instanceof Grad) {
+				grads.add(p);
+			}
+		}
+		return grads;
+	}
+	
+	public boolean duplicateId(int id) {
+		ArrayList<Person> students = getStudents();
+		for(Person p : students) {
+			Student s = (Student)p;
+			if(s.getId()==id) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

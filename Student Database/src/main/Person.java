@@ -11,4 +11,8 @@ public class Person {
 	public String getName() {
 		return name;
 	}
+	
+	public String print() {
+		return "Name: " + name;
+	}
 }
